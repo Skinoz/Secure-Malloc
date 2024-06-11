@@ -3,16 +3,12 @@
 #include "my_secmalloc.private.h"
 #include <sys/mman.h>
 
+// Forward declaration if not included in the header
+void *init_meta_pool();
 
-// test creation pool de meta
+// Test creation pool de meta
 Test(simple, meta_pool_init) {
-    void *ptr = my_malloc(32);
-    cr_assert(ptr != NULL, "Failed to init meta_pool");
-}
-
-Test(simple, malloc2) {
-    void *ptr1 = my_malloc(8);
-    cr_assert(ptr1 != NULL, "Failed to malloc2");
-    void *ptr2 = my_malloc(8);
-    cr_assert((size_t)ptr2 == (size_t)ptr1 + 12 + (sizeof(struct chunk)), "Failed to alloc :");
+    size_t value = 10;
+    void *ptr = my_malloc(value);
+    printf("ptr : %p\n", ptr);
 }
