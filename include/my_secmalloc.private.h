@@ -6,7 +6,6 @@
 #include <stddef.h> // size_t
 
 struct metadata_t {
-    struct metadata_t   *next;
     void                *data_ptr;
     size_t              size;
     int                 isFree; // 0 = BUSY // 1 = FREE
