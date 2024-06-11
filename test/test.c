@@ -4,10 +4,15 @@
 #include <sys/mman.h>
 
 
-//Simple test mmap 
-Test(mmap, simple) {
-    void *ptr = mmap(NULL, 4096, PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_PRIVATE, -1, 0);
-    cr_expect(ptr != NULL);
-    int res = munmap(ptr, 4096);
-    cr_expect(res == 0);
+// test creation pool de meta
+Test(simple, meta_pool_init) {
+    void *ptr = my_malloc(32);
+    cr_assert(ptr != NULL, "Failed to init meta_pool");
+}
+
+Test(simple, malloc2) {
+    void *ptr1 = my_malloc(8);
+    cr_assert(ptr1 != NULL, "Failed to malloc2");
+    void *ptr2 = my_malloc(8);
+    cr_assert((size_t)ptr2 == (size_t)ptr1 + 12 + (sizeof(struct chunk)), "Failed to alloc :");
 }

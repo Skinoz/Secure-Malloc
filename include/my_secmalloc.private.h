@@ -7,25 +7,13 @@
 #include <stdint.h> // uint64_t
 #include <stddef.h> // size_t
 
-// Enumeration to represent the state of a memory block
-typedef enum {
-    FREE,  // Block is Free
-    BUSY   // Block is Busy
-} State;
-
-// Structure representing the metadata of a memory block
-typedef struct _meta_pool {
-    State state;             // FREE || BUSY
-    Data_pool* ptr;          // Pointer to data_pool (block)
-    struct _meta_pool *next; // Pointer to the next Meta_Data in meta_pool
-    struct _meta_pool *prev; // Pointer to the previous Meta_Data in meta_pool
-} Meta_pool;
-
-// Structure representing a data pool with linked list connections
-typedef struct _data_pool {
-    uint64_t canary;        // Value to define integrity of each block
-    size_t size;            // Size of the block
-} Data_pool;
+struct metadata_t
+{
+    struct metadata_t   *next;
+    void                *data_ptr;
+    size_t              size;
+    int                 isFree; // 0 = BUSY // 1 = FREE
+};
 
 // Function prototypes for memory management
 void *my_malloc(size_t size);
