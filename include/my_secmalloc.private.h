@@ -11,6 +11,10 @@ struct metadata_t {
     int                 isFree; // 0 = BUSY // 1 = FREE
 };
 
+struct data_t {
+    uint64_t            canary; // Canarie value
+};
+
 // Function prototypes for memory management
 void *my_malloc(size_t size);
 void my_free(void *ptr);

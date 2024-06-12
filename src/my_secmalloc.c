@@ -88,57 +88,57 @@ struct metadata_t *get_free_metadata() {
 }
 
 void *my_malloc(size_t size) {
-    // TODO : Rezise data_pool if no free chunk is found
-    // TODO : Add canary to detect buffer overflow
     if (meta_pool == NULL) {
-        // printf("MetaPool is Null\n");
         meta_pool = init_meta_pool();
     }
     
     if (data_pool == NULL) {
-        // printf("DataPool is Null\n");
         data_pool = init_data_pool();
-        meta_information->data_ptr = data_pool; // Set pointer to meta information
+        meta_information->data_ptr = data_pool;
     }
     
-    // Find a free metadata slot
     struct metadata_t *new_meta = get_free_metadata();
     if (new_meta == NULL) {
         perror("No free metadata slot available");
         return NULL;
     }
     
-    // Find a free data block
     void *ch = get_free_chunk(size);
     if (ch == NULL) {
         perror("Error at get free chunk");
         return NULL;
     }
 
-    // Allocate memory for the new data block
-    void *new_data_block = mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_PRIVATE, -1, 0);
+    void *new_data_block = mmap(NULL, size + sizeof(struct data_t), PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_PRIVATE, -1, 0);
     if (new_data_block == MAP_FAILED) {
         perror("mmap failed");
         return NULL;
     }
 
-    // Update metadata for the new data block
-    new_meta->data_ptr = new_data_block;
+    // Set canary value
+    struct data_t *data_info = (struct data_t *)new_data_block;
+    data_info->canary = 0xdeadbeef; // Example canary value
+
+    new_meta->data_ptr = (void *)((char *)new_data_block + sizeof(struct data_t));
     new_meta->size = size;
     new_meta->isFree = 0;
 
-    // printf("[ NEW ALLOCATION ] Is Free at %p ? : %d | data_ptr at : %p\n",new_meta, new_meta->isFree, new_meta->data_ptr);
-    return new_data_block;
+    return new_meta->data_ptr;
 }
 
 
 void my_free(void *ptr) {
-    for (int i = 0; i < POOL_SIZE; i++) {
-        if (meta_information[i].data_ptr == ptr) {
-            munmap(ptr, meta_information[i].size); // Libération de la mémoire allouée pour ce bloc
-            meta_information[i].data_ptr = NULL;
-            meta_information[i].size = 0;
-            meta_information[i].isFree = 1;
+    for (struct metadata_t *item = meta_information; (char *)item < (char *)meta_pool + meta_pool_size; item++) {
+        if (item->data_ptr == ptr) {
+            struct data_t *data_info = (struct data_t *)((char *)ptr - sizeof(struct data_t));
+            if (data_info->canary != 0xdeadbeef) {
+                perror("Buffer overflow detected");
+                return;
+            }
+            munmap(data_info, item->size + sizeof(struct data_t));
+            item->data_ptr = NULL;
+            item->size = 0;
+            item->isFree = 1;
             return;
         }
     }
@@ -183,8 +183,10 @@ void *my_realloc(void *ptr, size_t size) {
         return NULL;
     }
 
+    size_t current_size = meta_ptr->size + sizeof(struct data_t);
     // Resize the memory region using mremap
-    void *new_ptr = mremap(ptr, meta_ptr->size, size, MREMAP_MAYMOVE);
+    // TODO REPAIR MREMAP TO WORK WITH CANARY
+    void *new_ptr = mremap(ptr, current_size, sizeof(struct data_t), MREMAP_MAYMOVE);
     if (new_ptr == MAP_FAILED) {
         perror("mremap failed");
         return NULL;
