@@ -45,7 +45,7 @@ Test(simple, my_free){
     printf("[ My_Free ] ptr3 at %p\n", ptr3);
 }
 
-/*
+
 Test(simple, my_calloc) {
     // Step 1: Allocate memory using my_calloc
     size_t nmemb = 5;
@@ -70,7 +70,7 @@ Test(simple, my_calloc) {
 
     printf("---- END test my_calloc ----\n");
 }
-*/
+
 
 Test(simple, my_realloc_int) {
     printf("---- START test my_realloc_int ----\n");

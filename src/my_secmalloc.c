@@ -146,11 +146,15 @@ void my_free(void *ptr) {
 }
 
 void *my_calloc(size_t nmemb, size_t size) {
-    (void)nmemb;
-    (void)size;
-    return NULL;
-    // TODO : Add my_calloc function 
+    size_t total_size = nmemb * size; // Calculate the total size of memory to allocate
+    void *ptr = my_malloc(total_size); // Allocate memory using my_malloc
+    if (ptr != NULL) {
+        // If allocation was successful, set all memory to zero
+        memset(ptr, 0, total_size);
+    }
+    return ptr;
 }
+
 
 void *my_realloc(void *ptr, size_t size) {
     // If ptr is NULL, it behaves like malloc(size)
