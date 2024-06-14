@@ -55,7 +55,7 @@ struct metadata_t    *get_free_chunk(size_t s)
             next_meta->next = NULL;
             next_meta->data_ptr = data_wptr + s;
             next_meta->size = item->size - s;
-            next_meta->isFree = 1;
+            next_meta->isFree = 1; // en faisant ca on gere pas le fait de pouvoir free un chunk aleatoire dans le pool et de trouve run chunk dispo en plein mileiu du pool :/
             printf("next_meta next = %p\n", next_meta->next);
             printf("next_meta data_ptr = %p\n", next_meta->data_ptr);
             printf("next_meta size = %ld\n", next_meta->size);
@@ -71,10 +71,12 @@ struct metadata_t    *get_free_chunk(size_t s)
             printf("aucun chunk de la taille demandee a ete trouve, entension du mmap.......\n");
             printf("data_wptr = %p\n", data_wptr);
             data_wptr = mremap(data_wptr, data_pool_size, data_pool_size + s, MREMAP_MAYMOVE);
-            printf("data_wptr after remap = %p\n", data_wptr);
+            printf("data_wptr after remap (pour voir si changement d'adresse du datapool)= %p\n", data_wptr);
             // augmentation du datapool
-            data_pool_size = data_pool_size + s;
-            //get_free_chunk(s);
+            printf("ancienne taille du chunk = %zu\n", item->size);
+            item->size = item->size + s;
+            printf("nouvelle taille du chunk = %zu\n", item->size);
+            item = get_free_chunk(s);
             // recurvisite infinie , find stop point
             return item;
         }
@@ -87,7 +89,7 @@ void    *my_malloc(size_t size)
     (void) size;
     //void *ptr;
     // get free chunk
-    printf("OK\n");
+    printf("LANCEMENT DE MALLOC - TAILLE DEMANDEE = %zu \n", size);
     struct metadata_t *ch = get_free_chunk(size);
     printf("## CHUNK TROUVE !!!! == %p\n", ch);
     // il faut mtn passer le chunk a free et dire que le next est apres

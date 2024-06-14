@@ -8,9 +8,9 @@
 Test(simple, init_meta_pool) {
     void *ptr = my_malloc(32);
     cr_assert(ptr != NULL, "Fail");
-    void *ptr2 = my_malloc(1000);
+    void *ptr2 = my_malloc(1024);
     cr_assert(ptr2 != NULL, "Fail");
-    void *ptr3 = my_malloc(6000);
+    void *ptr3 = my_malloc(4096);
     cr_assert(ptr3 != NULL, "Fail");
 }
 
