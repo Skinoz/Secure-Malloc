@@ -1,4 +1,3 @@
-// My_secmalloc.c
 #define _GNU_SOURCE
 #include "my_secmalloc.private.h"
 #include <stdio.h>
@@ -77,7 +76,6 @@ struct metadata_t    *get_free_chunk(size_t s)
             item->size = item->size + s;
             printf("nouvelle taille du chunk = %zu\n", item->size);
             item = get_free_chunk(s);
-            // recurvisite infinie , find stop point
             return item;
         }
     }
@@ -101,7 +99,19 @@ void    *my_malloc(size_t size)
 }
 void    my_free(void *ptr)
 {
-    (void) ptr;
+    //(void) ptr;
+    printf("TEST\n");
+    for (struct metadata_t *item = meta_pool;(size_t)item < (size_t)meta_pool + meta_pool_size; item = (struct metadata_t *)((size_t)item + sizeof(struct metadata_t)))
+    {
+        if (item->data_ptr == ptr)
+        {
+            item->isFree = 1;
+            printf("chunk freeeeeeed\n");
+        }
+        /* else {
+            printf("erreur : aucun chunk trouve a cette adresse :( ");
+        } */
+    }
 }
 void    *my_calloc(size_t nmemb, size_t size)
 {

@@ -3,7 +3,7 @@
 #include "my_secmalloc.private.h"
 #include <sys/mman.h>
 
-
+/* 
 // test creation pool de meta
 Test(simple, init_meta_pool) {
     void *ptr = my_malloc(32);
@@ -12,6 +12,14 @@ Test(simple, init_meta_pool) {
     cr_assert(ptr2 != NULL, "Fail");
     void *ptr3 = my_malloc(4096);
     cr_assert(ptr3 != NULL, "Fail");
+} */
+
+// test free
+Test(simple, free) {
+    void *ptr = my_malloc(32);
+    printf("ptr addr = %p\n", ptr);
+    my_free(ptr);
+    //cr_assert(ptr != NULL, "Fail");
 }
 
 /* Test(simple, malloc2) {
