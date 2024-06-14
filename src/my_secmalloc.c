@@ -12,6 +12,8 @@ size_t meta_pool_size = sizeof(struct metadata_t) * 1000; // on va dire que on p
 void *data_wptr = NULL; // commence juste apres le metadata_pool
 size_t data_pool_size = 4096;
 
+const unsigned long canary_value = 0xDEADBEEFDEADBEEF;
+
 // initalisation/creation du pool de meta
 struct metadata_t    *init_meta_pool()
 {
@@ -47,12 +49,11 @@ struct metadata_t    *get_free_chunk(size_t s)
         printf("1 iteration\n");
         if (item->isFree == 1 && item->size > s) // si le chunk est libre et que sa taille est plus grande que celle demandee
         {
-
             printf("RENTRE DANS LE IF -- CHUNK EST DISPO\n");
             printf("data ptr 1 = %p\n", item->data_ptr);
             struct metadata_t *next_meta = (struct metadata_t *)((char *)item + sizeof(struct metadata_t));
             next_meta->next = NULL;
-            next_meta->data_ptr = data_wptr + s;
+            next_meta->data_ptr = data_wptr + s + sizeof(unsigned long); // ajout de la taille du canary 8 octets
             next_meta->size = item->size - s;
             next_meta->isFree = 1; // en faisant ca on gere pas le fait de pouvoir free un chunk aleatoire dans le pool et de trouve run chunk dispo en plein mileiu du pool :/
             printf("next_meta next = %p\n", next_meta->next);
@@ -63,6 +64,12 @@ struct metadata_t    *get_free_chunk(size_t s)
             item->isFree = 0;
             printf("data ptr 2 = %p\n", item->data_ptr);
             
+            // mise en place du canary
+            unsigned long *canary_ptr = (unsigned long *)((char *)item->data_ptr + s);
+            *canary_ptr = canary_value;
+            printf("canary value = %ld\n", canary_value);
+            printf("canary addr = %p\n", canary_ptr);
+
             return item;
         }        
         else if (item->next == NULL)
@@ -103,8 +110,13 @@ void    my_free(void *ptr)
     printf("TEST\n");
     for (struct metadata_t *item = meta_pool;(size_t)item < (size_t)meta_pool + meta_pool_size; item = (struct metadata_t *)((size_t)item + sizeof(struct metadata_t)))
     {
-        if (item->data_ptr == ptr)
+        if (item->data_ptr == ptr) // pour arriver sur la bonne meta
         {
+            unsigned long *canary_ptr = (unsigned long *)((char *)ptr + item->size - sizeof(unsigned long));
+            if (*canary_ptr != canary_value) {
+                printf("memoire corrompue !!!!!!!!!!!\n");
+                return;
+            }
             item->isFree = 1;
             printf("chunk freeeeeeed\n");
         }
