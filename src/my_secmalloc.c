@@ -74,7 +74,7 @@ struct metadata_t    *get_free_chunk(size_t s)
             printf("data_wptr after remap = %p\n", data_wptr);
             // augmentation du datapool
             data_pool_size = data_pool_size + s;
-            get_free_chunk(s);
+            //get_free_chunk(s);
             // recurvisite infinie , find stop point
             return item;
         }
