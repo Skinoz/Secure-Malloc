@@ -7,6 +7,7 @@
 void *init_meta_pool();
 
 // Test creation pool de meta
+
 Test(simple, my_malloc_valid_access) {
     size_t value = 10; // Allocate memory for 10 values
     int count = 0;
@@ -42,8 +43,9 @@ Test(simple, my_malloc_valid_access) {
     my_free(ptr2);
 }
 
+
 Test(simple, my_malloc_multiple) {
-    size_t value = 10;
+    size_t value = 4096;
     int *ptr = (int *)my_malloc(value);
     printf("[ My_Malloc ] ptr: %p\n", ptr);
     cr_assert_not_null(ptr, "Allocation failed"); // Verify that the allocation is successful
@@ -52,33 +54,33 @@ Test(simple, my_malloc_multiple) {
     printf("[ My_Malloc ] ptr2: %p\n", ptr2);
     cr_assert_not_null(ptr2, "Allocation failed"); // Verify that the allocation is successful
 
-    int *ptr3 = (int *)my_malloc(value);
-    printf("[ My_Malloc ] ptr: %p\n", ptr);
-    cr_assert_not_null(ptr, "Allocation failed"); // Verify that the allocation is successful
-
-    int *ptr4 = (int *)my_malloc(value);
-    printf("[ My_Malloc ] ptr2: %p\n", ptr2);
-    cr_assert_not_null(ptr2, "Allocation failed"); // Verify that the allocation is successful
-
-    int *ptr5 = (int *)my_malloc(value);
-    printf("[ My_Malloc ] ptr: %p\n", ptr);
-    cr_assert_not_null(ptr, "Allocation failed"); // Verify that the allocation is successful
-
-    int *ptr6 = (int *)my_malloc(value);
-    printf("[ My_Malloc ] ptr2: %p\n", ptr2);
-    cr_assert_not_null(ptr2, "Allocation failed"); // Verify that the allocation is successful
-
-    int *ptr7 = (int *)my_malloc(value);
-    printf("[ My_Malloc ] ptr: %p\n", ptr);
-    cr_assert_not_null(ptr, "Allocation failed"); // Verify that the allocation is successful
-
-    int *ptr8 = (int *)my_malloc(value);
-    printf("[ My_Malloc ] ptr2: %p\n", ptr2);
-    cr_assert_not_null(ptr2, "Allocation failed"); // Verify that the allocation is successful
-
-
     my_free(ptr);
     my_free(ptr2);
+    
+    int *ptr3 = (int *)my_malloc(value);
+    printf("[ My_Malloc ] ptr3: %p\n", ptr3);
+    cr_assert_not_null(ptr3, "Allocation failed"); // Verify that the allocation is successful
+
+    int *ptr4 = (int *)my_malloc(value);
+    printf("[ My_Malloc ] ptr4: %p\n", ptr4);
+    cr_assert_not_null(ptr4, "Allocation failed"); // Verify that the allocation is successful
+
+    int *ptr5 = (int *)my_malloc(value);
+    printf("[ My_Malloc ] ptr5: %p\n", ptr5);
+    cr_assert_not_null(ptr5, "Allocation failed"); // Verify that the allocation is successful
+
+    int *ptr6 = (int *)my_malloc(value);
+    printf("[ My_Malloc ] ptr6: %p\n", ptr6);
+    cr_assert_not_null(ptr6, "Allocation failed"); // Verify that the allocation is successful
+
+    int *ptr7 = (int *)my_malloc(value);
+    printf("[ My_Malloc ] ptr7: %p\n", ptr7);
+    cr_assert_not_null(ptr7, "Allocation failed"); // Verify that the allocation is successful
+
+    int *ptr8 = (int *)my_malloc(value);
+    printf("[ My_Malloc ] ptr8: %p\n", ptr8);
+    cr_assert_not_null(ptr8, "Allocation failed"); // Verify that the allocation is successful
+
     my_free(ptr3);
     my_free(ptr4);
     my_free(ptr5);
@@ -88,8 +90,6 @@ Test(simple, my_malloc_multiple) {
 
 
 }
-
-
 
 Test(simple, my_free){
     size_t value = 10;

@@ -1,0 +1,86 @@
+[2024-06-15 18:12:22] malloc requested for size 4096
+[2024-06-15 18:12:22] malloc requested for size 20
+[2024-06-15 18:12:22] Initialize metadata pool
+[2024-06-15 18:12:22] Initialize metadata pool
+[2024-06-15 18:12:22] meta_pool initialized at 0x7fd41b0b9000
+[2024-06-15 18:12:22] meta_pool initialized at 0x7f965363a000
+[2024-06-15 18:12:22] malloc requested for size 10
+[2024-06-15 18:12:22] malloc successful: allocated 20 bytes at 0x7fd41b0ea008
+[2024-06-15 18:12:22] malloc requested for size 10
+[2024-06-15 18:12:22] malloc successful: allocated 4096 bytes at 0x7f9653638008
+[2024-06-15 18:12:22] Initialize metadata pool
+[2024-06-15 18:12:22] Initialize metadata pool
+[2024-06-15 18:12:22] malloc requested for size 4096
+[2024-06-15 18:12:22] free requested for pointer 0x7fd41b0ea008
+[2024-06-15 18:12:22] meta_pool initialized at 0x7fc47196b000
+[2024-06-15 18:12:22] [ 1 ] Pointer 0x7f965363a000 | Next is 0x7f965363a020 | Free 0 | data_ptr : 0x7f9653638008 | size : 4096
+
+[2024-06-15 18:12:22] meta_pool initialized at 0x7f19c1fe3000
+[2024-06-15 18:12:22] malloc successful: allocated 10 bytes at 0x7fc47199c008
+[2024-06-15 18:12:22] malloc successful: allocated 4096 bytes at 0x7f9653636008
+[2024-06-15 18:12:22] malloc successful: allocated 10 bytes at 0x7f19c2014008
+[2024-06-15 18:12:22] free requested for pointer 0x7f9653638008
+[2024-06-15 18:12:22] free requested for pointer 0x7f19c2014008
+[2024-06-15 18:12:22] free requested for pointer 0x7f9653636008
+[2024-06-15 18:12:22] malloc requested for size 4096
+[2024-06-15 18:12:22] malloc requested for size 10
+[2024-06-15 18:12:22] malloc requested for size 10
+[2024-06-15 18:12:22] malloc successful: allocated 4096 bytes at 0x7f9653638008
+[2024-06-15 18:12:22] malloc successful: allocated 10 bytes at 0x7f19c2014008
+[2024-06-15 18:12:22] [ 1 ] Pointer 0x7fc47196b000 | Next is 0x7fc47196b020 | Free 0 | data_ptr : 0x7fc47199c008 | size : 10
+
+[2024-06-15 18:12:22] free requested for pointer 0x7f19c2014008
+[2024-06-15 18:12:22] malloc requested for size 4096
+[2024-06-15 18:12:22] malloc successful: allocated 10 bytes at 0x7fc47196a008
+[2024-06-15 18:12:22] [ 1 ] Pointer 0x7f965363a000 | Next is 0x7f965363a020 | Free 0 | data_ptr : 0x7f9653638008 | size : 4096
+
+[2024-06-15 18:12:22] malloc successful: allocated 4096 bytes at 0x7f9653636008
+[2024-06-15 18:12:22] malloc requested for size 4096
+[2024-06-15 18:12:22] free requested for pointer 0x7fc47199c008
+[2024-06-15 18:12:22] [ 1 ] Pointer 0x7f965363a000 | Next is 0x7f965363a020 | Free 0 | data_ptr : 0x7f9653638008 | size : 4096
+
+[2024-06-15 18:12:22] [ 2 ] Pointer 0x7f965363a020 | Next is 0x7f965363a040 | Free 0 | data_ptr : 0x7f9653636008 | size : 4096
+
+[2024-06-15 18:12:22] malloc successful: allocated 4096 bytes at 0x7f9653634008
+[2024-06-15 18:12:22] free requested for pointer 0x7fc47196a008
+[2024-06-15 18:12:22] malloc requested for size 4096
+[2024-06-15 18:12:22] [ 1 ] Pointer 0x7f965363a000 | Next is 0x7f965363a020 | Free 0 | data_ptr : 0x7f9653638008 | size : 4096
+
+[2024-06-15 18:12:22] [ 2 ] Pointer 0x7f965363a020 | Next is 0x7f965363a040 | Free 0 | data_ptr : 0x7f9653636008 | size : 4096
+
+[2024-06-15 18:12:22] [ 3 ] Pointer 0x7f965363a040 | Next is 0x7f965363a060 | Free 0 | data_ptr : 0x7f9653634008 | size : 4096
+
+[2024-06-15 18:12:22] malloc successful: allocated 4096 bytes at 0x7f9653632008
+[2024-06-15 18:12:22] malloc requested for size 4096
+[2024-06-15 18:12:22] [ 1 ] Pointer 0x7f965363a000 | Next is 0x7f965363a020 | Free 0 | data_ptr : 0x7f9653638008 | size : 4096
+
+[2024-06-15 18:12:22] [ 2 ] Pointer 0x7f965363a020 | Next is 0x7f965363a040 | Free 0 | data_ptr : 0x7f9653636008 | size : 4096
+
+[2024-06-15 18:12:22] [ 3 ] Pointer 0x7f965363a040 | Next is 0x7f965363a060 | Free 0 | data_ptr : 0x7f9653634008 | size : 4096
+
+[2024-06-15 18:12:22] [ 4 ] Pointer 0x7f965363a060 | Next is 0x7f965363a080 | Free 0 | data_ptr : 0x7f9653632008 | size : 4096
+
+[2024-06-15 18:12:22] malloc successful: allocated 4096 bytes at 0x7f9653630008
+[2024-06-15 18:12:22] malloc requested for size 4096
+[2024-06-15 18:12:22] [ 1 ] Pointer 0x7f965363a000 | Next is 0x7f965363a020 | Free 0 | data_ptr : 0x7f9653638008 | size : 4096
+
+[2024-06-15 18:12:22] [ 2 ] Pointer 0x7f965363a020 | Next is 0x7f965363a040 | Free 0 | data_ptr : 0x7f9653636008 | size : 4096
+
+[2024-06-15 18:12:22] [ 3 ] Pointer 0x7f965363a040 | Next is 0x7f965363a060 | Free 0 | data_ptr : 0x7f9653634008 | size : 4096
+
+[2024-06-15 18:12:22] [ 4 ] Pointer 0x7f965363a060 | Next is 0x7f965363a080 | Free 0 | data_ptr : 0x7f9653632008 | size : 4096
+
+[2024-06-15 18:12:22] [ 5 ] Pointer 0x7f965363a080 | Next is 0x7f965363a0a0 | Free 0 | data_ptr : 0x7f9653630008 | size : 4096
+
+[2024-06-15 18:12:22] malloc successful: allocated 4096 bytes at 0x7f965362e008
+[2024-06-15 18:12:22] free requested for pointer 0x7f9653638008
+[2024-06-15 18:12:22] free requested for pointer 0x7f9653636008
+[2024-06-15 18:12:22] free requested for pointer 0x7f9653634008
+[2024-06-15 18:12:22] free requested for pointer 0x7f9653632008
+[2024-06-15 18:12:22] free requested for pointer 0x7f9653630008
+[2024-06-15 18:12:22] free requested for pointer 0x7f965362e008
+[2024-06-15 18:12:22] malloc requested for size 20
+[2024-06-15 18:12:22] Initialize metadata pool
+[2024-06-15 18:12:22] meta_pool initialized at 0x7f8308bfd000
+[2024-06-15 18:12:22] malloc successful: allocated 20 bytes at 0x7f8308c2e008
+[2024-06-15 18:12:22] free requested for pointer 0x7f8308c2e008
